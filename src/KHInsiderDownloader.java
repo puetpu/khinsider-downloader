@@ -13,6 +13,7 @@ public class KHInsiderDownloader {
 
     private static final String[] FORMATS = {"mp3"}; // File type(s) to look for
     private static final String TITLE_SEPARATOR = ". "; // Track index and title separator, e.g. 1. Title
+    private static final String BASE_URL = "https://downloads.khinsider.com/game-soundtracks/album/";
 
     // Configure the progressbar
     private static final char[] PBAR_ENDS = {'[', ']'};
@@ -30,6 +31,11 @@ public class KHInsiderDownloader {
 	// Cycle through the albums
         int u = 0;
         for (String albumURL : args) {
+            // Add the full URL to the argument if necessary
+            if (!albumURL.contains(BASE_URL)) {
+                albumURL = BASE_URL + albumURL;
+            }  
+
             // Store any failed downloads in a string
             String failedTracks = "";
 
